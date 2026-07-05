@@ -1,0 +1,46 @@
+# Runtime outputs
+/runs/
+
+# Local datasets and archives are stored on AutoDL, not in git
+/datasets/
+/GC10dataset/
+/GC10dataset_9_1/
+*.zip
+
+# Ultralytics examples/docs are not needed for the minimal ablation runner
+/docs/
+/examples/
+/docker/
+/inference/
+/root/
+
+# Dataset caches are regenerated on each machine
+*.cache
+*.npy
+
+# IDE and cache files
+/.idea/
+/.venv-yolo/
+/.venv/
+/__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+
+# Local command stubs accidentally created in the workspace
+/python
+/yolo
+resume_gc10_*.py
+run_gc10_*.ps1
+
+# Extra weights and export artifacts
+*.pt
+*.onnx
+*.engine
+*.torchscript
+*.tflite
+*.mlpackage
+
+# OS files
+Thumbs.db
+.DS_Store
