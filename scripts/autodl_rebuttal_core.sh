@@ -19,6 +19,13 @@ WORKERS="${WORKERS:-8}"
 DEVICE="${DEVICE:-0}"
 PRETRAINED="${PRETRAINED:-True}"
 
+DRY_RUN=0
+for arg in "$@"; do
+  if [[ "${arg}" == "--dry-run" ]]; then
+    DRY_RUN=1
+  fi
+done
+
 POOLING_VARIANTS="${POOLING_VARIANTS:-gap gmp gap_gmp top1 ppap}"
 GRAPH_VARIANTS="${GRAPH_VARIANTS:-minimal}"
 
@@ -73,6 +80,10 @@ if [[ "${RUN_GRAPH_ABLATION}" == "1" ]]; then
 fi
 
 if [[ "${RUN_PROFILE}" == "1" ]]; then
+  if [[ "${DRY_RUN}" == "1" ]]; then
+    echo "Skipping profiling in dry-run mode."
+    exit 0
+  fi
   python rebuttal_pooling_ablation.py --dry-run --variants ${POOLING_VARIANTS}
   python rebuttal_graph_ablation.py --dry-run --variants ${GRAPH_VARIANTS}
   python rebuttal_profile.py \
